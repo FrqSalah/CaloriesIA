@@ -19,16 +19,16 @@ AI Calorie Counter is a cross-platform mobile and desktop application built usin
 
 ```mermaid
 graph TD
-    A[App UI Layer (.NET MAUI Views)] --> B[ViewModels (MVVM)]
-    B --> C[Services Layer]
-    C --> D[AI Recognition Service]
-    C --> E[Data Sync Service]
-    C --> F[Barcode Scanning Service]
-    D --> G[Cloud Vision API]
-    E --> H[Cloud Backend API]
-    F --> I[ZXing Barcode Library]
-    C --> J[SQLite Database]
-    J --> H
+    A["App UI Layer (.NET MAUI Views)"] -->|Data Binding| B["ViewModels (MVVM)"]
+    B -->|Service Calls| C["Services Layer"]
+    C -->|AI Analysis| D["AI Recognition Service"]
+    C -->|Sync Data| E["Data Sync Service"]
+    C -->|Scan Barcode| F["Barcode Scanning Service"]
+    D -->|Process Images| G["Cloud Vision API"]
+    E -->|REST API Calls| H["Cloud Backend API"]
+    F -->|Barcode Recognition| I["ZXing Barcode Library"]
+    C -->|Store Data| J["SQLite Database"]
+    J -->|Sync with Backend| H
 ```
 
 ---
