@@ -18,17 +18,66 @@ AI Calorie Counter is a cross-platform mobile and desktop application built usin
 ### Architecture Diagram:
 
 ```mermaid
-graph TD
-    A["App UI Layer (.NET MAUI Views)"] -->|Data Binding| B["ViewModels (MVVM)"]
-    B -->|Service Calls| C["Services Layer"]
-    C -->|AI Analysis| D["AI Recognition Service"]
-    C -->|Sync Data| E["Data Sync Service"]
-    C -->|Scan Barcode| F["Barcode Scanning Service"]
-    D -->|Process Images| G["Cloud Vision API"]
-    E -->|REST API Calls| H["Cloud Backend API"]
-    F -->|Barcode Recognition| I["ZXing Barcode Library"]
-    C -->|Store Data| J["SQLite Database"]
-    J -->|Sync with Backend| H
+flowchart LR
+    %% Client Apps - .NET MAUI Cross-Platform
+    subgraph Client_Apps
+        AndroidApp[Android - .NET MAUI]
+        iOSApp[iOS - .NET MAUI]
+        WindowsApp[Windows - .NET MAUI]
+    end
+
+    %% BFF Layer
+    subgraph BFF
+        MauiAPI[MAUI BFF API]
+    end
+
+    %% Backend Services
+    subgraph User_Service
+        UserAPI[User API]
+        UserDB[[PostgreSQL]]
+        UserAPI --> UserDB
+    end
+
+    subgraph Nutrition_Service
+        NutritionAPI[Nutrition API]
+        NutritionDB[[PostgreSQL]]
+        NutritionAPI --> NutritionDB
+    end
+
+    subgraph Image_Analysis_Service
+        ImageAPI[Image Recognition API]
+    end
+
+    subgraph Calorie_Service
+        CalorieAPI[Calorie Computation API]
+    end
+
+    subgraph AI_Service
+        OpenAI[OpenAI / Azure OpenAI]
+    end
+
+    subgraph Notifications
+        PushService[Push Notification Service]
+    end
+
+
+    %% Client to BFF
+    AndroidApp --> MauiAPI
+    iOSApp --> MauiAPI
+    WindowsApp --> MauiAPI
+
+    %% BFF to Backend APIs
+    MauiAPI --> UserAPI
+    MauiAPI --> NutritionAPI
+    MauiAPI --> ImageAPI
+    MauiAPI --> PushService
+
+    %% ImageAPI flow
+    ImageAPI --> AI_Service
+    ImageAPI --> CalorieAPI
+
+    %% CalorieAPI usage
+    CalorieAPI --> AI_Service
 ```
 
 ---
