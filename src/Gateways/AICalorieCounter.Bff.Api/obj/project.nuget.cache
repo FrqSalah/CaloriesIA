@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "tEKphOGPm/o=",
+  "success": true,
+  "projectFilePath": "/workspaces/CaloriesIA/src/Gateways/AICalorieCounter.Bff.Api/AICalorieCounter.Bff.Api.csproj",
+  "expectedPackageFiles": [
+    "/root/.nuget/packages/microsoft.aspnetcore.openapi/9.0.6/microsoft.aspnetcore.openapi.9.0.6.nupkg.sha512",
+    "/root/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
